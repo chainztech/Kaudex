@@ -14,11 +14,7 @@ library MathUtils {
         }
     }
 
-    function frac(
-        uint256 amount,
-        uint256 num,
-        uint256 denom
-    ) internal pure returns (uint256) {
+    function frac(uint256 amount, uint256 num, uint256 denom) internal pure returns (uint256) {
         return (amount * num) / denom;
     }
 
@@ -26,13 +22,12 @@ library MathUtils {
         return a < b ? a : b;
     }
 
-    function addThenSubWithFraction(
-        uint256 orig,
-        uint256 add,
-        uint256 sub,
-        uint256 num,
-        uint256 denum
-    ) internal pure returns (uint256) {
+    function addThenSubWithFraction(uint256 orig, uint256 add, uint256 sub, uint256 num, uint256 denum) internal pure returns (uint256) {
         return zeroCapSub(orig + MathUtils.frac(add, num, denum), MathUtils.frac(sub, num, denum));
+    }
+
+    function average(uint256 a, uint256 b) internal pure returns (uint256) {
+        // (a + b) / 2 can overflow.
+        return (a & b) + (a ^ b) / 2;
     }
 }
